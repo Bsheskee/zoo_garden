@@ -1,6 +1,5 @@
-from .mammal import Mammal
+"""Lion - exported from mammal module."""
 
-class Lion(Mammal):
+from .mammal import Lion
 
-    def make_sound(self):
-        return "Roar"
+__all__ = ["Lion"]
