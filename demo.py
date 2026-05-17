@@ -24,7 +24,7 @@ def main():
     aviary = zoo.create_enclosure("Aviary", 4)
     pond = zoo.create_enclosure("Pond", 2)
     print(f"Created zoo: {zoo}")
-    print(f"Enclosures: {[e.name for e in zoo._enclosures.values()]}")
+    print(f"Enclosures: {[e.name for e in zoo.enclosures.values()]}")
 
     # 2. Add animals to enclosures
     print("\n--- 2. Adding Animals ---")
@@ -63,7 +63,7 @@ def main():
     print("\n--- 5. Assigning Zookeeper ---")
     keeper = Zookeeper("John", 4000)
     keeper.assign_to(savanna)
-    print(f"Zookeeper {keeper.name} assigned to: {keeper._assigned_enclosure.name}")
+    print(f"Zookeeper {keeper.name} assigned to: {keeper.assigned_enclosure.name}")
     print(keeper.feed_animals())
 
     # 6. Generate zoo report
@@ -110,7 +110,7 @@ def main():
     zoo.hire_employee(guide)
 
     print("\nEmployee roles:")
-    for emp in zoo._employees:
+    for emp in zoo.employees:
         print(f"  {emp.name}: {emp.role()}")
         print(f"    Work: {emp.work()}")
 

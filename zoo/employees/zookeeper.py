@@ -16,6 +16,11 @@ class Zookeeper(Employee):
         super().__init__(name, salary)
         self._assigned_enclosure: Optional = None
 
+    @property
+    def assigned_enclosure(self):
+        """Return the assigned enclosure."""
+        return self._assigned_enclosure
+
     def assign_to(self, enclosure) -> None:
         """Assign this zookeeper to a specific enclosure."""
         self._assigned_enclosure = enclosure

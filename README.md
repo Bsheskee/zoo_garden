@@ -9,9 +9,9 @@ System „Zoo Garden" to aplikacja wspierająca zarządzanie ogrodem zoologiczny
 
 | Imię i Nazwisko | Zakres odpowiedzialności |
 | :--- | :--- |
-| **Bartłomiej Białobrzewski** | Testy jednostkowe (`pytest`), Use Cases, diagram UML |
-| **Wiktor Habryń** | Implementacja klas (zwierzęta, personel), logika systemu |
-| **Bartłomiej Żołek** | Code Review, walidacja logiki, optymalizacja |
+| **Bartłomiej Białobrzewski** | Testy jednostkowe (`pytest`), Use Cases, diagram UML, `CHECKLIST.md`, `JUSTIFICATION.md` |
+| **Wiktor Habryń** | Implementacja klas (zwierzęta, personel, wybiegi, harmonogram karmienia), logika systemu (`Zoo`, `exceptions.py`, `demo.py`) |
+| **Bartłomiej Żołek** | Code Review, walidacja logiki, optymalizacja, `README.md`, konfiguracja projektu (`.gitignore`, `requirements.txt`) |
 
 ---
 
@@ -20,32 +20,38 @@ System „Zoo Garden" to aplikacja wspierająca zarządzanie ogrodem zoologiczny
 ```
 zoo_garden/
 ├── zoo/
-│   ├── __init__.py              # Package initialization
-│   ├── exceptions.py            # Custom exception hierarchy (ZooError, etc.)
+│   ├── __init__.py                 # Package initialization
+│   ├── exceptions.py               # Custom exception hierarchy (ZooError, etc.)
 │   ├── animals/
-│   │   ├── __init__.py
-│   │   ├── animal.py            # Base Animal ABC with _next_id, health property
-│   │   ├── mammal.py            # Mammal class + Lion, Elephant, Monkey
-│   │   ├── bird.py              # Bird class + Eagle, Penguin
-│   │   └── reptile.py           # Reptile class + Crocodile
+│   │   ├── __init__.py             # Subpackage init
+│   │   ├── animal.py               # Base Animal ABC with _next_id, health property
+│   │   ├── mammal.py               # Mammal class + Lion, Elephant, Monkey
+│   │   ├── bird.py                 # Bird class + Eagle, Penguin
+│   │   ├── reptile.py              # Reptile class + Crocodile
+│   │   ├── lion.py                 # Lion re-export stub
+│   │   ├── elephant.py             # Elephant re-export stub
+│   │   ├── eagle.py                # Eagle re-export stub
+│   │   └── crocodile.py            # Crocodile re-export stub
 │   ├── employees/
-│   │   ├── __init__.py
-│   │   ├── employee.py          # Base Employee ABC
-│   │   ├── zookeeper.py         # Zookeeper with enclosure assignment
-│   │   ├── veterinarian.py      # Veterinarian with specialization
-│   │   ├── guide.py             # Guide with languages
+│   │   ├── __init__.py             # Subpackage init
+│   │   ├── employee.py             # Base Employee ABC
+│   │   ├── zookeeper.py            # Zookeeper with enclosure assignment
+│   │   ├── veterinarian.py         # Veterinarian with specialization
+│   │   ├── guide.py                # Guide with languages
 │   │   └── tests/
-│   │       ├── test_animals.py  # Animal tests
-│   │       ├── test_enclosure.py # Enclosure tests
-│   │       └── test_zoo.py      # Zoo tests
-│   ├── enclosure.py             # Enclosure class with dunder methods
-│   ├── feeding_schedule.py      # FeedingEntry (@dataclass) and FeedingSchedule
-│   └── zoo.py                   # Main Zoo class
-├── demo.py                      # Demo script showing system usage
-├── README.md                    # This file
-├── Projekt_A_Zoo_Garden.md      # Project specification
-├── improvements.md              # List of improvements to implement
-├── requirements.txt             # Python dependencies
+│   │       ├── test_animals.py     # 15 animal tests
+│   │       ├── test_enclosure.py   # 15 enclosure tests
+│   │       └── test_zoo.py         # 15 zoo tests
+│   ├── enclosure.py                # Enclosure class with dunder methods
+│   ├── feeding_schedule.py         # FeedingEntry (@dataclass) and FeedingSchedule
+│   └── zoo.py                      # Main Zoo class
+├── demo.py                         # Demo script showing system usage
+├── README.md                       # This file
+├── CHECKLIST.md                    # OOP mechanisms checklist
+├── JUSTIFICATION.md                # Design decisions justifications
+├── Projekt_A_Zoo_Garden.md         # Project specification
+├── improvements.md                 # List of improvements to implement
+├── requirements.txt                # Python dependencies
 └── .gitignore
 ```
 
@@ -60,19 +66,19 @@ zoo_garden/
 | `Bird` | Klasa pośrednia dla ptaków, definiująca ich zdolności związane z lataniem. | `_wingspan`, `_can_fly`, `diet()`, `fly()` |
 | `Reptile` | Klasa pośrednia dla gadów, zawierająca ich typowe zachowania. | `_is_venomous`, `diet()`, `bask()`, `is_cold_blooded()` |
 | `Lion` | Konkretna implementacja ssaka reprezentująca lwa. Nadpisuje metodę `make_sound()`. | `make_sound()`, `diet()` |
-| `Elephant` | Reprezentuje słonia oraz umożliwia aktualizację jego zdrowia. | `make_sound()`, `diet()` |
+| `Elephant` | Reprezentuje słonia – największego ssaka lądowego. | `make_sound()`, `diet()`, `_tusk_length` |
 | `Monkey` | Reprezentuje małpę - inteligentnego prymata. | `make_sound()`, `climb()` |
 | `Eagle` | Reprezentuje ptaka drapieżnego z możliwością wydawania charakterystycznego dźwięku. | `make_sound()`, `diet()` |
 | `Penguin` | Reprezentuje ptaka nielatającego. | `make_sound()`, `swim()` |
 | `Crocodile` | Reprezentuje gada, implementując jego zachowanie dźwiękowe. | `make_sound()`, `diet()`, `swim()` |
-| `Employee` (ABC) | Abstrakcyjna klasa bazowa dla pracowników zoo. Odpowiada za wspólne dane i kontrakt metod. | `_id`, `_name`, `_salary`, `_assigned_enclosures`, `assign_to()`, `work()`, `role()` |
+| `Employee` (ABC) | Abstrakcyjna klasa bazowa dla pracowników zoo. Odpowiada za wspólne dane i kontrakt metod. | `_id`, `_name`, `_salary`, `_assigned_enclosures`, `assign_to()`, `unassign_from()`, `work()`, `role()` |
 | `Zookeeper` | Pracownik odpowiedzialny za opiekę nad wybiegami i zwierzętami. | `_assigned_enclosure`, `assign_to()`, `feed_animals()`, `work()`, `role()` |
 | `Veterinarian` | Lekarz zajmujący się leczeniem zwierząt oraz aktualizacją ich zdrowia. | `_specialization`, `treat_animal()`, `work()`, `role()` |
 | `Guide` | Przewodnik oprowadzający odwiedzających po zoo. | `_languages`, `add_language()`, `give_tour()`, `work()`, `role()` |
 | `Enclosure` | Reprezentuje wybieg dla zwierząt, zarządza ich listą oraz kontroluje pojemność. | `_name`, `_capacity`, `_animals`, `add_animal()`, `remove_animal()`, `find_animal()`, `feed_all()` |
 | `FeedingEntry` | Dataclass reprezentujący pojedynczy wpis w harmonogramie karmienia. | `enclosure_name`, `time`, `food_type`, `notes` |
 | `FeedingSchedule` | Zarządza harmonogramem karmienia dla całego zoo. | `day`, `entries`, `add_entry()`, `remove_entry()`, `get_by_enclosure()` |
-| `Zoo` | Główna klasa systemowa zarządzająca wybiegami i personelem. | `_name`, `_city`, `_enclosures`, `_employees`, `create_enclosure()`, `hire_employee()`, `find_animal()`, `report()` |
+| `Zoo` | Główna klasa systemowa zarządzająca wybiegami i personelem. | `_name`, `_city`, `_enclosures`, `_employees`, `create_enclosure()`, `hire_employee()`, `find_animal()`, `report()`, `enclosures`, `employees` |
 
 ---
 
@@ -147,27 +153,45 @@ except EnclosureFullError as e:
     print(f"Cannot add animal: {e}")
 
 try:
-    enclosure.remove_animal(tiger)  # Raises AnimalNotFoundError if not present
+    enclosure.remove_animal(lion)  # Raises AnimalNotFoundError if not present
 except AnimalNotFoundError as e:
     print(f"Animal not found: {e}")
 ```
 
 ---
 
-## 8. Planowane funkcjonalności
+## 8. Demonstracja (demo.py)
+
+Zgodnie z wymaganiami specyfikacji (sekcja 2.5), `demo.py` realizuje następujące scenariusze:
+
+| # | Scenariusz | Status |
+|:-:|:-----------|:------:|
+| 1 | Stworzenie zoo z wybiegami | ✅ |
+| 2 | Dodanie zwierząt do wybiegów | ✅ |
+| 3 | Próba dodania zwierzęcia do pełnego wybiegu (`EnclosureFullError`) | ✅ |
+| 4 | Karmienie zwierząt (`feed_all`) | ✅ |
+| 5 | Przypisanie opiekuna do wybiegu (asocjacja) | ✅ |
+| 6 | Generowanie raportu o stanie zoo | ✅ |
+| 7 | Polimorficzne wywołanie metod na liście zwierząt (`make_sound`, `diet`) | ✅ |
+
+Dodatkowo zademonstrowano: clampowanie zdrowia, harmonogram karmienia, polimorfizm pracowników oraz leczenie zwierząt przez weterynarza.
+
+---
+
+## 9. Zrealizowane funkcjonalności
 
 - Dodawanie zwierzęcia do wybiegu z walidacją pojemności (wyjątek `EnclosureFullError`)
 - Usuwanie zwierzęcia z wybiegu (wyjątek `AnimalNotFoundError` jeśli nie znaleziono)
 - Przeglądanie listy zwierząt w wybiegu
 - Aktualizacja stanu zdrowia zwierzęcia (z ograniczeniem 0–100 - clamping)
-- Przypisywanie pracownika do jednego lub wielu wybiegów
-- Generowanie raportu pracowników i ich obowiązków
-- Przeglądanie wybiegów przez pracownika (np. przewodnika)
+- Przypisywanie pracownika do wybiegów
+- Generowanie raportu zoo z wybiegami i pracownikami
 - Harmonogram karmienia z `@dataclass` FeedingEntry
+- Polimorficzne wywołania metod na różnych typach zwierząt i pracowników
 
 ---
 
-## 9. User Stories
+## 10. User Stories
 
 1. **Jako opiekun** chcę dodać nowe zwierzę do wybiegu, żeby system automatycznie sprawdził, czy jest tam wolne miejsce.  
 2. **Jako weterynarz** chcę zaktualizować stan zdrowia zwierzęcia po leczeniu, żeby mieć pewność, że dane są poprawne.  
@@ -175,7 +199,31 @@ except AnimalNotFoundError as e:
 
 ---
 
-## 10. Mechanizmy OOP
+## 11. Testy jednostkowe (pytest)
+
+Zgodnie ze specyfikacją (sekcja 2.6) zaimplementowano 15 scenariuszy testowych, pokrywających główne funkcjonalności systemu. Testy znajdują się w `zoo/employees/tests/`.
+
+| # | Scenariusz testowy | Lokalizacja |
+|:-:|:-------------------|:------------|
+| 1 | Tworzenie zwierząt różnych typów | `test_animals.py:test_create_animals` |
+| 2 | Sprawdzenie bazowych statystyk i properties | `test_animals.py:test_animal_stats_and_properties` |
+| 3 | Dodawanie zwierząt do wybiegu | `test_enclosure.py:test_add_animal_to_enclosure` |
+| 4 | Walidacja pojemności wybiegu (`EnclosureFullError`) | `test_enclosure.py:test_enclosure_capacity_validation` |
+| 5 | Usuwanie zwierzęcia z wybiegu (`AnimalNotFoundError`) | `test_enclosure.py:test_remove_nonexistent_animal` |
+| 6 | Karmienie zwierząt (`feed`, `feed_all`) | `test_animals.py:test_feed_method`, `test_enclosure.py:test_feed_all_animals` |
+| 7 | Walidacja health (clamping 0–100) | `test_animals.py:test_health_clamping` |
+| 8 | Porównanie obiektów (`__eq__`) | `test_animals.py:test_animal_comparison` |
+| 9 | Sortowanie obiektów (`__lt__`) | `test_animals.py:test_animal_sorting` |
+| 10 | Walidacja danych (wyjątki przy nieprawidłowych wartościach) | `test_animals.py:test_name_validation` |
+| 11 | Reprezentacje obiektów (`__str__`, `__repr__`) | `test_animals.py:test_animal_str_repr` |
+| 12 | Polimorfizm – wywołanie metod na liście zwierząt | `test_animals.py:test_make_sound_polymorphism` |
+| 13 | Dziedziczenie – `isinstance`/`issubclass` | `test_animals.py:test_isinstance_checks` |
+| 14 | FeedingSchedule – dodawanie/usuwanie wpisów | `test_zoo.py:test_feeding_schedule`, `test_zoo.py:test_feeding_schedule_remove` |
+| 15 | Raport o stanie zoo | `test_zoo.py:test_zoo_report` |
+
+---
+
+## 12. Mechanizmy OOP
 
 | Mechanizm | Gdzie w projekcie | Opis |
 | :--- | :--- | :--- |
@@ -197,8 +245,9 @@ except AnimalNotFoundError as e:
 
 ---
 
-## 11. Historia zmian
+## 13. Historia zmian
 
+### Sesja 1 — Implementacja początkowa
 - Dodano `exceptions.py` z hierarchią wyjątków (`ZooError`, `EnclosureFullError`, `AnimalNotFoundError`, `InvalidAnimalDataError`)
 - Dodano klasę `Monkey` do modułu `mammal.py`
 - Zaimplementowano `FeedingEntry` (@dataclass) i `FeedingSchedule` z pełną funkcjonalnością
@@ -206,3 +255,14 @@ except AnimalNotFoundError as e:
 - Zaktualizowano wszystkie klasy o metody specjalne (dunder)
 - Przeniesiono `_assigned_enclosures` z `Zookeeper` do `Employee` (zgodność z zasadą DRY)
 - Dodano harmonogram karmienia do README
+
+### Sesja 2 — Poprawki zgodności ze specyfikacją
+- Dodano `CHECKLIST.md` – checklista mechanizmów OOP (sekcja 6.1 specyfikacji)
+- Dodano `JUSTIFICATION.md` – uzasadnienia decyzji projektowych (sekcja 8.1)
+- Dodano brakujące `__init__.py` w podpakietach `zoo/animals/` i `zoo/employees/`
+- Dodano properties `Zoo.enclosures`, `Zoo.employees`, `Zookeeper.assigned_enclosure`
+- Poprawiono `demo.py` – zastąpiono dostęp do prywatnych atrybutów (`_enclosures`, `_employees`, `_assigned_enclosure`) publicznymi property
+- Zaktualizowano README: poprawiono strukturę plików, przykład wyjątku (`tiger`→`lion`), dodano sekcje demonstracji (8) i mapowania testów (11), zaktualizowano opisy klas i podział pracy
+- Zaktualizowano `zoo_garden_diagram.drawio` – diagram UML zgodny z aktualnym kodem
+- Dodano `zoo_garden_diagram.md` – diagram UML w Mermaid z instrukcją importu do draw.io
+- Dodano `__pycache__/` i `*.pyc` do `.gitignore` – usunięto pliki skompilowane z repozytorium

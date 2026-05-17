@@ -34,6 +34,16 @@ class Zoo:
     def city(self) -> str:
         return self._city
 
+    @property
+    def enclosures(self) -> dict:
+        """Return a copy of the enclosures dict."""
+        return dict(self._enclosures)
+
+    @property
+    def employees(self) -> list:
+        """Return a copy of the employees list."""
+        return list(self._employees)
+
     def create_enclosure(self, name: str, capacity: int) -> Enclosure:
         """
         Create a new enclosure in the zoo.
