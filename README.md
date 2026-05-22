@@ -15,6 +15,7 @@ System „Zoo Garden" to aplikacja wspierająca zarządzanie ogrodem zoologiczny
 
 ---
 
+
 ## 3. Struktura plików (hierarchia)
 
 ```
@@ -38,13 +39,16 @@ zoo_garden/
 │   │   ├── zookeeper.py            # Zookeeper with enclosure assignment
 │   │   ├── veterinarian.py         # Veterinarian with specialization
 │   │   ├── guide.py                # Guide with languages
-│   │   └── tests/
-│   │       ├── test_animals.py     # 15 animal tests
-│   │       ├── test_enclosure.py   # 15 enclosure tests
-│   │       └── test_zoo.py         # 15 zoo tests
 │   ├── enclosure.py                # Enclosure class with dunder methods
 │   ├── feeding_schedule.py         # FeedingEntry (@dataclass) and FeedingSchedule
 │   └── zoo.py                      # Main Zoo class
+├── tests/
+│   ├── __init__.py                 # Test package marker
+│   ├── conftest.py                 # pytest configuration file (if needed)
+│   ├── test_animals.py             # 15 animal tests
+│   ├── test_enclosure.py           # 15 enclosure tests
+│   ├── test_zoo.py                 # 15 zoo tests
+│   └── __pycache__/                # Compiled test bytecode
 ├── demo.py                         # Demo script showing system usage
 ├── README.md                       # This file
 ├── CHECKLIST.md                    # OOP mechanisms checklist
@@ -199,27 +203,28 @@ Dodatkowo zademonstrowano: clampowanie zdrowia, harmonogram karmienia, polimorfi
 
 ---
 
+
 ## 11. Testy jednostkowe (pytest)
 
-Zgodnie ze specyfikacją (sekcja 2.6) zaimplementowano 15 scenariuszy testowych, pokrywających główne funkcjonalności systemu. Testy znajdują się w `zoo/employees/tests/`.
+Zgodnie ze specyfikacją (sekcja 2.6) zaimplementowano 15 scenariuszy testowych, pokrywających główne funkcjonalności systemu. Testy znajdują się w katalogu `tests/` w głównym folderze projektu.
 
 | # | Scenariusz testowy | Lokalizacja |
 |:-:|:-------------------|:------------|
-| 1 | Tworzenie zwierząt różnych typów | `test_animals.py:test_create_animals` |
-| 2 | Sprawdzenie bazowych statystyk i properties | `test_animals.py:test_animal_stats_and_properties` |
-| 3 | Dodawanie zwierząt do wybiegu | `test_enclosure.py:test_add_animal_to_enclosure` |
-| 4 | Walidacja pojemności wybiegu (`EnclosureFullError`) | `test_enclosure.py:test_enclosure_capacity_validation` |
-| 5 | Usuwanie zwierzęcia z wybiegu (`AnimalNotFoundError`) | `test_enclosure.py:test_remove_nonexistent_animal` |
-| 6 | Karmienie zwierząt (`feed`, `feed_all`) | `test_animals.py:test_feed_method`, `test_enclosure.py:test_feed_all_animals` |
-| 7 | Walidacja health (clamping 0–100) | `test_animals.py:test_health_clamping` |
-| 8 | Porównanie obiektów (`__eq__`) | `test_animals.py:test_animal_comparison` |
-| 9 | Sortowanie obiektów (`__lt__`) | `test_animals.py:test_animal_sorting` |
-| 10 | Walidacja danych (wyjątki przy nieprawidłowych wartościach) | `test_animals.py:test_name_validation` |
-| 11 | Reprezentacje obiektów (`__str__`, `__repr__`) | `test_animals.py:test_animal_str_repr` |
-| 12 | Polimorfizm – wywołanie metod na liście zwierząt | `test_animals.py:test_make_sound_polymorphism` |
-| 13 | Dziedziczenie – `isinstance`/`issubclass` | `test_animals.py:test_isinstance_checks` |
-| 14 | FeedingSchedule – dodawanie/usuwanie wpisów | `test_zoo.py:test_feeding_schedule`, `test_zoo.py:test_feeding_schedule_remove` |
-| 15 | Raport o stanie zoo | `test_zoo.py:test_zoo_report` |
+| 1 | Tworzenie zwierząt różnych typów | `tests/test_animals.py:test_create_animals` |
+| 2 | Sprawdzenie bazowych statystyk i properties | `tests/test_animals.py:test_animal_stats_and_properties` |
+| 3 | Dodawanie zwierząt do wybiegu | `tests/test_enclosure.py:test_add_animal_to_enclosure` |
+| 4 | Walidacja pojemności wybiegu (`EnclosureFullError`) | `tests/test_enclosure.py:test_enclosure_capacity_validation` |
+| 5 | Usuwanie zwierzęcia z wybiegu (`AnimalNotFoundError`) | `tests/test_enclosure.py:test_remove_nonexistent_animal` |
+| 6 | Karmienie zwierząt (`feed`, `feed_all`) | `tests/test_animals.py:test_feed_method`, `tests/test_enclosure.py:test_feed_all_animals` |
+| 7 | Walidacja health (clamping 0–100) | `tests/test_animals.py:test_health_clamping` |
+| 8 | Porównanie obiektów (`__eq__`) | `tests/test_animals.py:test_animal_comparison` |
+| 9 | Sortowanie obiektów (`__lt__`) | `tests/test_animals.py:test_animal_sorting` |
+| 10 | Walidacja danych (wyjątki przy nieprawidłowych wartościach) | `tests/test_animals.py:test_name_validation` |
+| 11 | Reprezentacje obiektów (`__str__`, `__repr__`) | `tests/test_animals.py:test_animal_str_repr` |
+| 12 | Polimorfizm – wywołanie metod na liście zwierząt | `tests/test_animals.py:test_make_sound_polymorphism` |
+| 13 | Dziedziczenie – `isinstance`/`issubclass` | `tests/test_animals.py:test_isinstance_checks` |
+| 14 | FeedingSchedule – dodawanie/usuwanie wpisów | `tests/test_zoo.py:test_feeding_schedule`, `tests/test_zoo.py:test_feeding_schedule_remove` |
+| 15 | Raport o stanie zoo | `tests/test_zoo.py:test_zoo_report` |
 
 ---
 
