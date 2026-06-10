@@ -262,8 +262,7 @@ Zgodnie ze specyfikacją (sekcja 2.6) zaimplementowano 15 scenariuszy testowych,
 - Dodano harmonogram karmienia do README
 
 ### Sesja 2 — Poprawki zgodności ze specyfikacją
-- Dodano `CHECKLIST.md` – checklista mechanizmów OOP (sekcja 6.1 specyfikacji)
-- Dodano `JUSTIFICATION.md` – uzasadnienia decyzji projektowych (sekcja 8.1)
+- Dodano brakujące testy (untracked)
 - Dodano brakujące `__init__.py` w podpakietach `zoo/animals/` i `zoo/employees/`
 - Dodano properties `Zoo.enclosures`, `Zoo.employees`, `Zookeeper.assigned_enclosure`
 - Poprawiono `demo.py` – zastąpiono dostęp do prywatnych atrybutów (`_enclosures`, `_employees`, `_assigned_enclosure`) publicznymi property
