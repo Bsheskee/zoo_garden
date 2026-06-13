@@ -3,8 +3,7 @@
 import pytest
 from zoo.zoo import Zoo
 from zoo.enclosure import Enclosure
-from zoo.animals.mammal import Lion, Elephant
-from zoo.animals.bird import Eagle
+from zoo.animals import Lion, Elephant, Eagle
 from zoo.employees.zookeeper import Zookeeper
 from zoo.employees.veterinarian import Veterinarian
 from zoo.employees.guide import Guide

@@ -1,9 +1,7 @@
 """Tests for animal classes."""
 
 import pytest
-from zoo.animals.mammal import Lion, Elephant, Monkey
-from zoo.animals.bird import Eagle, Penguin
-from zoo.animals.reptile import Crocodile
+from zoo.animals import Lion, Elephant, Monkey, Eagle, Penguin, Crocodile
 
 
 @pytest.fixture
@@ -94,8 +92,11 @@ def test_mammal_features(lion):
 
 def test_bird_features(eagle, penguin):
     """Test 7: Bird-specific features."""
-    assert eagle.fly().find("flying") != -1
-    assert "cannot fly" in penguin.fly()
+    from zoo.animals import Flyable
+    assert "flying" in eagle.fly()
+    assert isinstance(eagle, Flyable)
+    assert not isinstance(penguin, Flyable)
+    assert "swimming" in penguin.swim()
 
 
 def test_reptile_features(crocodile):
@@ -149,8 +150,7 @@ def test_feed_method():
 
 def test_isinstance_checks(lion, elephant):
     """Test 13: isinstance and issubclass checks."""
-    from zoo.animals.animal import Animal
-    from zoo.animals.mammal import Mammal
+    from zoo.animals import Animal, Mammal
 
     assert isinstance(lion, Lion)
     assert isinstance(lion, Mammal)

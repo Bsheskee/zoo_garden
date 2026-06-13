@@ -2,7 +2,7 @@
 
 import pytest
 from zoo.enclosure import Enclosure
-from zoo.animals.mammal import Lion, Elephant
+from zoo.animals import Lion, Elephant
 from zoo.exceptions import EnclosureFullError, AnimalNotFoundError
 
 

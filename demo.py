@@ -1,8 +1,6 @@
 """Demo script for Zoo Garden Management System."""
 
-from zoo.animals.mammal import Lion, Elephant, Monkey
-from zoo.animals.bird import Eagle, Penguin
-from zoo.animals.reptile import Crocodile
+from zoo.animals import Lion, Elephant, Monkey, Eagle, Penguin, Crocodile
 from zoo.enclosure import Enclosure
 from zoo.zoo import Zoo
 from zoo.exceptions import ZooError, EnclosureFullError, AnimalNotFoundError, InvalidAnimalDataError

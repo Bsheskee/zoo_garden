@@ -1,5 +1,15 @@
-"""Lion - exported from mammal module."""
+"""Lion — king of beasts."""
 
-from .mammal import Lion
+from .mammal import Mammal
 
-__all__ = ["Lion"]
+
+class Lion(Mammal):
+    def __init__(self, name: str, age: int, mane: bool = True) -> None:
+        super().__init__(name, age)
+        self._mane = mane
+
+    def make_sound(self) -> str:
+        return "Roar!"
+
+    def diet(self) -> str:
+        return "Lions are carnivores, hunting zebras, wildebeests, and other prey."
