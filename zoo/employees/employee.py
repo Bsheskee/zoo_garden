@@ -1,7 +1,6 @@
 """Employee module for the Zoo Garden system."""
 
 from abc import ABC, abstractmethod
-from typing import Optional
 
 
 class Employee(ABC):

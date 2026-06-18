@@ -1,7 +1,9 @@
 """Enclosure module for the Zoo Garden system."""
 
-from typing import Iterator, Optional
-from .exceptions import EnclosureFullError, AnimalNotFoundError
+from collections.abc import Iterator
+from typing import Optional
+
+from .exceptions import AnimalNotFoundError, EnclosureFullError
 
 
 class Enclosure:
@@ -43,9 +45,7 @@ class Enclosure:
             EnclosureFullError: If the enclosure is at capacity.
         """
         if len(self._animals) >= self._capacity:
-            raise EnclosureFullError(
-                f"Enclosure '{self._name}' is full (capacity: {self._capacity})"
-            )
+            raise EnclosureFullError(f"Enclosure '{self._name}' is full (capacity: {self._capacity})")
         self._animals.append(animal)
 
     def remove_animal(self, animal) -> None:
@@ -59,9 +59,7 @@ class Enclosure:
             AnimalNotFoundError: If the animal is not in this enclosure.
         """
         if animal not in self._animals:
-            raise AnimalNotFoundError(
-                f"Animal '{animal.name}' not found in enclosure '{self._name}'"
-            )
+            raise AnimalNotFoundError(f"Animal '{animal.name}' not found in enclosure '{self._name}'")
         self._animals.remove(animal)
 
     def find_animal(self, name: str) -> Optional:

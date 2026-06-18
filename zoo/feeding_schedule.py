@@ -1,7 +1,6 @@
 """Feeding schedule module for the Zoo Garden system."""
 
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -15,6 +14,7 @@ class FeedingEntry:
         food_type: Type of food to serve.
         notes: Optional additional notes.
     """
+
     enclosure_name: str
     time: str
     food_type: str

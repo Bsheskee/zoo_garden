@@ -1,6 +1,5 @@
 """Guide module for the Zoo Garden system."""
 
-from typing import Optional
 from .employee import Employee
 
 
@@ -12,7 +11,7 @@ class Guide(Employee):
         _languages: List of languages the guide speaks.
     """
 
-    def __init__(self, name: str, languages: Optional[list] = None, salary: float = 3500.0) -> None:
+    def __init__(self, name: str, languages: list | None = None, salary: float = 3500.0) -> None:
         super().__init__(name, salary)
         self._languages = languages if languages else ["English"]
 

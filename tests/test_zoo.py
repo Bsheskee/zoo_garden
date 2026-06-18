@@ -1,13 +1,14 @@
 """Tests for Zoo class."""
 
 import pytest
-from zoo.zoo import Zoo
-from zoo.enclosure import Enclosure
-from zoo.animals import Lion, Elephant, Eagle
-from zoo.employees.zookeeper import Zookeeper
-from zoo.employees.veterinarian import Veterinarian
+
+from zoo.animals import Eagle, Elephant, Lion
 from zoo.employees.guide import Guide
+from zoo.employees.veterinarian import Veterinarian
+from zoo.employees.zookeeper import Zookeeper
+from zoo.enclosure import Enclosure
 from zoo.feeding_schedule import FeedingSchedule
+from zoo.zoo import Zoo
 
 
 @pytest.fixture

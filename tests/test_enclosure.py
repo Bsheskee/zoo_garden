@@ -1,9 +1,10 @@
 """Tests for Enclosure class."""
 
 import pytest
+
+from zoo.animals import Elephant, Lion
 from zoo.enclosure import Enclosure
-from zoo.animals import Lion, Elephant
-from zoo.exceptions import EnclosureFullError, AnimalNotFoundError
+from zoo.exceptions import AnimalNotFoundError, EnclosureFullError
 
 
 @pytest.fixture

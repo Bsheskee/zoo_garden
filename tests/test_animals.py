@@ -1,7 +1,8 @@
 """Tests for animal classes."""
 
 import pytest
-from zoo.animals import Lion, Elephant, Monkey, Eagle, Penguin, Crocodile
+
+from zoo.animals import Crocodile, Eagle, Elephant, Lion, Monkey, Penguin
 
 
 @pytest.fixture
@@ -93,6 +94,7 @@ def test_mammal_features(lion):
 def test_bird_features(eagle, penguin):
     """Test 7: Bird-specific features."""
     from zoo.animals import Flyable
+
     assert "flying" in eagle.fly()
     assert isinstance(eagle, Flyable)
     assert not isinstance(penguin, Flyable)
@@ -109,7 +111,6 @@ def test_animal_comparison():
     """Test 9: Animal comparison (__eq__, __hash__, __lt__)."""
     lion1 = Lion("Simba", 5)
     lion2 = Lion("Simba", 3)  # Same ID sequence, different object
-    lion3 = Lion("Simba", 5)  # Will have different ID
 
     # Same object comparison
     assert lion1 == lion1

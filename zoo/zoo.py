@@ -1,9 +1,9 @@
 """Zoo module - main system class for Zoo Garden."""
 
 from typing import Optional
-from .enclosure import Enclosure
+
 from .employees.employee import Employee
-from .exceptions import AnimalNotFoundError
+from .enclosure import Enclosure
 
 
 class Zoo:
@@ -59,7 +59,7 @@ class Zoo:
         self._enclosures[name] = enclosure
         return enclosure
 
-    def get_enclosure(self, name: str) -> Optional[Enclosure]:
+    def get_enclosure(self, name: str) -> Enclosure | None:
         """Get an enclosure by name."""
         return self._enclosures.get(name)
 
@@ -120,7 +120,7 @@ class Zoo:
             f"Total employees: {len(self._employees)}",
             f"Total animals: {self.total_animals()}",
             "",
-            "--- Enclosures ---"
+            "--- Enclosures ---",
         ]
         for enclosure in self._enclosures.values():
             lines.append(f"  {enclosure}")

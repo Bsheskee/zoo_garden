@@ -1,13 +1,12 @@
 """Demo script for Zoo Garden Management System."""
 
-from zoo.animals import Lion, Elephant, Monkey, Eagle, Penguin, Crocodile
-from zoo.enclosure import Enclosure
-from zoo.zoo import Zoo
-from zoo.exceptions import ZooError, EnclosureFullError, AnimalNotFoundError, InvalidAnimalDataError
-from zoo.feeding_schedule import FeedingSchedule, FeedingEntry
-from zoo.employees.zookeeper import Zookeeper
-from zoo.employees.veterinarian import Veterinarian
+from zoo.animals import Crocodile, Eagle, Elephant, Lion, Monkey, Penguin
 from zoo.employees.guide import Guide
+from zoo.employees.veterinarian import Veterinarian
+from zoo.employees.zookeeper import Zookeeper
+from zoo.exceptions import EnclosureFullError
+from zoo.feeding_schedule import FeedingSchedule
+from zoo.zoo import Zoo
 
 
 def main():
