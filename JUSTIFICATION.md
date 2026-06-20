@@ -97,7 +97,45 @@ Polimorfizm pozwala na wywołanie tej samej metody (`make_sound()`) na różnych
 
 ---
 
-## 10. Dlaczego Monkey nie nadpisuje metody diet()?
+## 10. Dlaczego `species` nie jest parametrem `Animal.__init__`?
+
+W szkielecie specyfikacji pojawia się sygnatura `Animal.__init__(name, species, age)`. Świadomie z niej zrezygnowaliśmy, ponieważ `species` jest właściwością **klasy**, a nie instancji:
+
+- Każda instancja `Lion` należy do tego samego gatunku — `species` jest stałe dla wszystkich obiektów danej klasy, więc powinno być atrybutem klasy, nie parametrem konstruktora.
+- Umieszczenie `species` w `__init__` otwierałoby drogę do niespójnych stanów: `Lion("Simba", 5, species="Tiger")` byłoby poprawne składniowo, lecz absurdalne semantycznie.
+- Hierarchia dziedziczenia **jest** taksonomią gatunków. `isinstance(lion, Mammal)` mówi tyle samo co atrybut `species="mammal"` — bez redundancji.
+- W razie potrzeby wyświetlenia nazwy gatunku używamy `self.__class__.__name__`, które jest zawsze spójne z rzeczywistym typem obiektu.
+
+Gdybyśmy chcieli przechowywać dodatkową informację o **podgatunku** (np. „African Lion" vs „Asiatic Lion"), byłby to oddzielny parametr konkretnej klasy (`subspecies`), a nie generyczny `species` w bazie.
+
+**Kod:** `zoo/animals/animal.py:20`, `zoo/animals/lion.py:7`
+
+---
+
+## 11. Dlaczego `Eagle` używa mixinu `Flyable` zamiast flagi `can_fly` w `Bird`?
+
+Szkielet specyfikacji proponuje `Bird.__init__(name, age, wingspan=1.0, can_fly=True)` z metodą `fly()` w klasie `Bird`. Zamiast tego zastosowaliśmy mixin `Flyable`:
+
+```
+Bird → Eagle + Flyable   (Eagle potrafi latać)
+Bird → Penguin           (Penguin nie dziedziczy Flyable)
+```
+
+**Wady podejścia z flagą `can_fly`:**
+- `Penguin` miałby metodę `fly()` dostępną w interfejsie, nawet jeśli `can_fly=False` — narusza to zasadę Interface Segregation (klient nie powinien zależeć od metod, których nie używa).
+- Sprawdzanie `if self.can_fly: ...` w `fly()` to logika warunkowa, którą OOP zastępuje polimorfizmem.
+- `isinstance(penguin, Flyable)` zwraca `False` — co jest czytelniejsze niż `penguin.can_fly == False`.
+
+**Zalety mixinu `Flyable`:**
+- Zdolność latania jest wyrażona strukturą typów, nie stanem atrybutu.
+- Dodanie nowego latającego zwierzęcia (np. `Parrot`) wymaga tylko odziedziczenia `Flyable` — żadnych zmian w `Bird`.
+- Testy mogą sprawdzać `isinstance(eagle, Flyable)` bez znajomości szczegółów implementacji.
+
+**Kod:** `zoo/animals/flyable.py`, `zoo/animals/eagle.py:7`, `zoo/animals/penguin.py:6`
+
+---
+
+## 12. Dlaczego Monkey nie nadpisuje metody diet()?
 
 Monkey nie nadpisuje `diet()`, ponieważ dziedziczy ogólną dietę od `Mammal`. Jest to świadoma decyzja projektowa:
 - Małpy mają zróżnicowaną dietę (wszystkożerne), podobnie jak ogólna dieta ssaków
