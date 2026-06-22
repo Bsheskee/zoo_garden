@@ -1,4 +1,4 @@
-"""Enclosure module for the Zoo Garden system."""
+"""Moduł wybiegu dla systemu Zoo Garden."""
 
 from collections.abc import Iterator
 from typing import Optional
@@ -8,12 +8,12 @@ from .exceptions import AnimalNotFoundError, EnclosureFullError
 
 class Enclosure:
     """
-    Represents an enclosure/pen for animals in the zoo.
+    Reprezentuje wybieg dla zwierząt w zoo.
 
     Attributes:
-        _name: Name of the enclosure.
-        _capacity: Maximum number of animals the enclosure can hold.
-        _animals: List of animals currently in the enclosure.
+        _name: Nazwa wybiegu.
+        _capacity: Maksymalna liczba zwierząt w wybiegu.
+        _animals: Lista zwierząt aktualnie w wybiegu.
     """
 
     def __init__(self, name: str, capacity: int) -> None:
@@ -31,18 +31,18 @@ class Enclosure:
 
     @property
     def animals(self) -> list:
-        """Return a copy of the animals list to prevent external modification."""
+        """Zwraca kopię listy zwierząt, aby zapobiec modyfikacji z zewnątrz."""
         return list(self._animals)
 
     def add_animal(self, animal) -> None:
         """
-        Add an animal to the enclosure.
+        Dodaje zwierzę do wybiegu.
 
         Args:
-            animal: The animal to add.
+            animal: Zwierzę do dodania.
 
         Raises:
-            EnclosureFullError: If the enclosure is at capacity.
+            EnclosureFullError: Gdy wybieg jest pełny.
         """
         if len(self._animals) >= self._capacity:
             raise EnclosureFullError(f"Enclosure '{self._name}' is full (capacity: {self._capacity})")
@@ -50,13 +50,13 @@ class Enclosure:
 
     def remove_animal(self, animal) -> None:
         """
-        Remove an animal from the enclosure.
+        Usuwa zwierzę z wybiegu.
 
         Args:
-            animal: The animal to remove.
+            animal: Zwierzę do usunięcia.
 
         Raises:
-            AnimalNotFoundError: If the animal is not in this enclosure.
+            AnimalNotFoundError: Gdy zwierzęcia nie ma w tym wybiegu.
         """
         if animal not in self._animals:
             raise AnimalNotFoundError(f"Animal '{animal.name}' not found in enclosure '{self._name}'")
@@ -64,13 +64,13 @@ class Enclosure:
 
     def find_animal(self, name: str) -> Optional:
         """
-        Find an animal by name in this enclosure.
+        Szuka zwierzęcia po imieniu w tym wybiegu.
 
         Args:
-            name: The name of the animal to find.
+            name: Imię szukanego zwierzęcia.
 
         Returns:
-            The animal if found, None otherwise.
+            Znalezione zwierzę lub None.
         """
         for animal in self._animals:
             if animal.name == name:
@@ -79,10 +79,10 @@ class Enclosure:
 
     def feed_all(self) -> list:
         """
-        Feed all animals in the enclosure.
+        Karmi wszystkie zwierzęta w wybiegu.
 
         Returns:
-            List of feeding confirmation strings.
+            Lista potwierdzeń karmienia.
         """
         return [animal.feed() for animal in self._animals]
 

@@ -1,4 +1,4 @@
-"""Penguin — flightless aquatic bird."""
+"""Pingwin — nielotny ptak wodny."""
 
 from .bird import Bird
 

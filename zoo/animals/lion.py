@@ -1,4 +1,4 @@
-"""Lion — king of beasts."""
+"""Lew — król zwierząt."""
 
 from .mammal import Mammal
 

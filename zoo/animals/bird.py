@@ -1,10 +1,10 @@
-"""Bird base class for the Zoo Garden system."""
+"""Klasa bazowa Bird dla systemu Zoo Garden."""
 
 from .animal import Animal
 
 
 class Bird(Animal):
-    """Intermediate base class for all birds."""
+    """Pośrednia klasa bazowa dla wszystkich ptaków."""
 
     def __init__(self, name: str, age: int, wingspan: float = 1.0) -> None:
         super().__init__(name, age)

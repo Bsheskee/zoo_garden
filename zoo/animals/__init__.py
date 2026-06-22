@@ -1,4 +1,4 @@
-"""Animals package — public API for all animal classes."""
+"""Pakiet animals — publiczne API dla wszystkich klas zwierząt."""
 
 from .animal import Animal
 from .bird import Bird

@@ -1,1 +1,1 @@
-"""Employees package - all employee classes."""
+"""Pakiet employees — wszystkie klasy pracowników."""

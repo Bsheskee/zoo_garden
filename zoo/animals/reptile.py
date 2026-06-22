@@ -1,10 +1,10 @@
-"""Reptile base class for the Zoo Garden system."""
+"""Klasa bazowa Reptile dla systemu Zoo Garden."""
 
 from .animal import Animal
 
 
 class Reptile(Animal):
-    """Intermediate base class for all reptiles."""
+    """Pośrednia klasa bazowa dla wszystkich gadów."""
 
     def __init__(self, name: str, age: int, is_venomous: bool = False) -> None:
         super().__init__(name, age)

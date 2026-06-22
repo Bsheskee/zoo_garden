@@ -1,4 +1,4 @@
-"""Eagle — majestic bird of prey."""
+"""Orzeł — majestatyczny ptak drapieżny."""
 
 from .bird import Bird
 from .flyable import Flyable

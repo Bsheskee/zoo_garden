@@ -1,4 +1,4 @@
-"""Demo script for Zoo Garden Management System."""
+"""Skrypt demonstracyjny systemu Zoo Garden."""
 
 from zoo.animals import Crocodile, Eagle, Elephant, Lion, Monkey, Penguin
 from zoo.employees.guide import Guide

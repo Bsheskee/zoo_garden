@@ -1,18 +1,18 @@
-"""Animal classes for the Zoo Garden system."""
+"""Klasy zwierząt systemu Zoo Garden."""
 
 from abc import ABC, abstractmethod
 
 
 class Animal(ABC):
     """
-    Abstract base class for all animals in the zoo.
+    Abstrakcyjna klasa bazowa dla wszystkich zwierząt w zoo.
 
     Attributes:
-        _next_id: Class-level counter for generating unique animal IDs.
-        _id: Unique identifier for the animal.
-        _name: Name of the animal.
-        _age: Age of the animal in years.
-        _health: Health status (0-100).
+        _next_id: Licznik klasy generujący unikalne identyfikatory zwierząt.
+        _id: Unikalny identyfikator zwierzęcia.
+        _name: Imię zwierzęcia.
+        _age: Wiek zwierzęcia w latach.
+        _health: Stan zdrowia (0-100).
     """
 
     _next_id: int = 1
@@ -52,12 +52,12 @@ class Animal(ABC):
 
     @abstractmethod
     def make_sound(self) -> str:
-        """Return the sound the animal makes."""
+        """Zwraca dźwięk wydawany przez zwierzę."""
         pass
 
     @abstractmethod
     def diet(self) -> str:
-        """Return the diet type of the animal."""
+        """Zwraca typ diety zwierzęcia."""
         pass
 
     def feed(self) -> str:

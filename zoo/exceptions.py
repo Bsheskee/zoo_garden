@@ -1,25 +1,25 @@
-"""Custom exceptions for the Zoo Garden system."""
+"""Własne wyjątki systemu Zoo Garden."""
 
 
 class ZooError(Exception):
-    """Base exception for all zoo-related errors."""
+    """Wyjątek bazowy dla wszystkich błędów związanych z zoo."""
 
     pass
 
 
 class EnclosureFullError(ZooError):
-    """Raised when trying to add an animal to a full enclosure."""
+    """Zgłaszany przy próbie dodania zwierzęcia do pełnego wybiegu."""
 
     pass
 
 
 class AnimalNotFoundError(ZooError):
-    """Raised when an animal is not found in an enclosure or zoo."""
+    """Zgłaszany gdy zwierzę nie zostało znalezione w wybiegu lub zoo."""
 
     pass
 
 
 class InvalidAnimalDataError(ZooError):
-    """Raised when animal data is invalid."""
+    """Zgłaszany gdy dane zwierzęcia są nieprawidłowe."""
 
     pass

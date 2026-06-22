@@ -1,4 +1,4 @@
-"""Elephant — largest land mammal."""
+"""Słoń — największy lądowy ssak."""
 
 from .mammal import Mammal
 

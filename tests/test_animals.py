@@ -1,4 +1,4 @@
-"""Tests for animal classes."""
+"""Testy klas zwierząt."""
 
 import pytest
 
@@ -36,7 +36,7 @@ def crocodile():
 
 
 def test_create_animals():
-    """Test 1: Creating different animal types."""
+    """Test 1: Tworzenie różnych typów zwierząt."""
     lion = Lion("Simba", 5)
     elephant = Elephant("Dumbo", 10)
     assert lion.name == "Simba"
@@ -44,7 +44,7 @@ def test_create_animals():
 
 
 def test_animal_stats_and_properties():
-    """Test 2: Check base stats and properties."""
+    """Test 2: Sprawdzenie podstawowych statystyk i właściwości."""
     lion = Lion("Simba", 5)
     assert lion.age == 5
     assert lion.health == 100
@@ -52,7 +52,7 @@ def test_animal_stats_and_properties():
 
 
 def test_health_clamping():
-    """Test 3: Health property clamping 0-100."""
+    """Test 3: Ograniczanie wartości zdrowia (clamping 0-100)."""
     lion = Lion("Simba", 5)
     lion.health = 150
     assert lion.health == 100
@@ -61,7 +61,7 @@ def test_health_clamping():
 
 
 def test_make_sound_polymorphism():
-    """Test 4: Polymorphic make_sound method."""
+    """Test 4: Polimorficzna metoda make_sound."""
     animals = [
         (Lion("Simba", 5), "Roar!"),
         (Elephant("Dumbo", 10), "Trumpet!"),
@@ -75,7 +75,7 @@ def test_make_sound_polymorphism():
 
 
 def test_diet_methods():
-    """Test 5: Diet methods for different animal types."""
+    """Test 5: Metody diet dla różnych typów zwierząt."""
     lion = Lion("Simba", 5)
     eagle = Eagle("Freedom", 4)
     crocodile = Crocodile("Snap", 8)
@@ -86,13 +86,13 @@ def test_diet_methods():
 
 
 def test_mammal_features(lion):
-    """Test 6: Mammal-specific features."""
+    """Test 6: Cechy charakterystyczne ssaków."""
     assert lion.has_fur() is True
     assert "live young" in lion.give_birth()
 
 
 def test_bird_features(eagle, penguin):
-    """Test 7: Bird-specific features."""
+    """Test 7: Cechy charakterystyczne ptaków."""
     from zoo.animals import Flyable
 
     assert "flying" in eagle.fly()
@@ -102,13 +102,13 @@ def test_bird_features(eagle, penguin):
 
 
 def test_reptile_features(crocodile):
-    """Test 8: Reptile-specific features."""
+    """Test 8: Cechy charakterystyczne gadów."""
     assert crocodile.is_cold_blooded() is True
     assert "basking" in crocodile.bask().lower()
 
 
 def test_animal_comparison():
-    """Test 9: Animal comparison (__eq__, __hash__, __lt__)."""
+    """Test 9: Porównywanie zwierząt (__eq__, __hash__, __lt__)."""
     lion1 = Lion("Simba", 5)
     lion2 = Lion("Simba", 3)  # Same ID sequence, different object
 
@@ -123,7 +123,7 @@ def test_animal_comparison():
 
 
 def test_animal_sorting():
-    """Test 10: Animal sorting (__lt__)."""
+    """Test 10: Sortowanie zwierząt (__lt__)."""
     animals = [
         Lion("Charlie", 3),
         Eagle("Alpha", 2),
@@ -136,7 +136,7 @@ def test_animal_sorting():
 
 
 def test_animal_str_repr():
-    """Test 11: String representations."""
+    """Test 11: Reprezentacje tekstowe."""
     lion = Lion("Simba", 5)
     assert "Simba" in str(lion)
     assert "Lion" in str(lion)
@@ -144,13 +144,13 @@ def test_animal_str_repr():
 
 
 def test_feed_method():
-    """Test 12: Feed method."""
+    """Test 12: Metoda karmienia."""
     lion = Lion("Simba", 5)
     assert "fed" in lion.feed().lower()
 
 
 def test_isinstance_checks(lion, elephant):
-    """Test 13: isinstance and issubclass checks."""
+    """Test 13: Sprawdzanie isinstance i issubclass."""
     from zoo.animals import Animal, Mammal
 
     assert isinstance(lion, Lion)
@@ -161,7 +161,7 @@ def test_isinstance_checks(lion, elephant):
 
 
 def test_name_validation():
-    """Test 14: Name validation."""
+    """Test 14: Walidacja imienia."""
     lion = Lion("Simba", 5)
     lion.name = "Mufasa"
     assert lion.name == "Mufasa"
@@ -171,7 +171,7 @@ def test_name_validation():
 
 
 def test_unique_ids():
-    """Test 15: Unique ID generation."""
+    """Test 15: Generowanie unikalnych identyfikatorów."""
     lion1 = Lion("Simba", 5)
     lion2 = Lion("Nala", 4)
     lion3 = Lion("Mufasa", 6)

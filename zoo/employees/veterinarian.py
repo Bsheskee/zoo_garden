@@ -1,14 +1,14 @@
-"""Veterinarian module for the Zoo Garden system."""
+"""Moduł weterynarza dla systemu Zoo Garden."""
 
 from .employee import Employee
 
 
 class Veterinarian(Employee):
     """
-    Veterinarian - medical care specialist for animals.
+    Weterynarz — specjalista od opieki medycznej nad zwierzętami.
 
     Attributes:
-        _specialization: Area of specialization (general, exotic, avian, etc.).
+        _specialization: Specjalizacja (general, exotic, avian itp.).
     """
 
     def __init__(self, name: str, specialization: str = "general", salary: float = 7000.0) -> None:
@@ -21,13 +21,13 @@ class Veterinarian(Employee):
 
     def treat_animal(self, animal) -> str:
         """
-        Treat an animal and update its health.
+        Leczy zwierzę i aktualizuje jego stan zdrowia.
 
         Args:
-            animal: The animal to treat.
+            animal: Zwierzę do leczenia.
 
         Returns:
-            Treatment confirmation string.
+            Potwierdzenie leczenia.
         """
         old_health = animal.health
         animal.health = min(100, animal.health + 20)

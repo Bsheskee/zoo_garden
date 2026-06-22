@@ -1,18 +1,18 @@
-"""Employee module for the Zoo Garden system."""
+"""Moduł pracownika dla systemu Zoo Garden."""
 
 from abc import ABC, abstractmethod
 
 
 class Employee(ABC):
     """
-    Abstract base class for all zoo employees.
+    Abstrakcyjna klasa bazowa dla wszystkich pracowników zoo.
 
     Attributes:
-        _next_id: Class-level counter for generating unique employee IDs.
-        _id: Unique identifier for the employee.
-        _name: Name of the employee.
-        _salary: Employee's salary.
-        _assigned_enclosures: List of enclosures assigned to this employee.
+        _next_id: Licznik klasy generujący unikalne identyfikatory pracowników.
+        _id: Unikalny identyfikator pracownika.
+        _name: Imię i nazwisko pracownika.
+        _salary: Wynagrodzenie pracownika.
+        _assigned_enclosures: Lista wybiegów przypisanych do pracownika.
     """
 
     _next_id: int = 1
@@ -44,27 +44,27 @@ class Employee(ABC):
 
     @property
     def assigned_enclosures(self) -> list:
-        """Return a copy of assigned enclosures."""
+        """Zwraca kopię listy przypisanych wybiegów."""
         return list(self._assigned_enclosures)
 
     def assign_to(self, enclosure) -> None:
-        """Assign this employee to an enclosure."""
+        """Przypisuje pracownika do wybiegu."""
         if enclosure not in self._assigned_enclosures:
             self._assigned_enclosures.append(enclosure)
 
     def unassign_from(self, enclosure) -> None:
-        """Unassign this employee from an enclosure."""
+        """Odpisuje pracownika od wybiegu."""
         if enclosure in self._assigned_enclosures:
             self._assigned_enclosures.remove(enclosure)
 
     @abstractmethod
     def work(self) -> str:
-        """Return what the employee does at work."""
+        """Zwraca opis czynności wykonywanych przez pracownika."""
         pass
 
     @abstractmethod
     def role(self) -> str:
-        """Return the role description of this employee."""
+        """Zwraca opis roli pracownika."""
         pass
 
     def __repr__(self) -> str:

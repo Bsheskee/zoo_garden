@@ -1,14 +1,14 @@
-"""Guide module for the Zoo Garden system."""
+"""Moduł przewodnika dla systemu Zoo Garden."""
 
 from .employee import Employee
 
 
 class Guide(Employee):
     """
-    Guide - leads tours and educates visitors about animals.
+    Przewodnik — oprowadza zwiedzających i edukuje ich o zwierzętach.
 
     Attributes:
-        _languages: List of languages the guide speaks.
+        _languages: Lista języków, którymi posługuje się przewodnik.
     """
 
     def __init__(self, name: str, languages: list | None = None, salary: float = 3500.0) -> None:
@@ -20,19 +20,19 @@ class Guide(Employee):
         return list(self._languages)
 
     def add_language(self, language: str) -> None:
-        """Add a language to the guide's repertoire."""
+        """Dodaje język do repertuaru przewodnika."""
         if language not in self._languages:
             self._languages.append(language)
 
     def give_tour(self, enclosure) -> str:
         """
-        Give a tour of an enclosure.
+        Prowadzi wycieczkę po wybiegu.
 
         Args:
-            enclosure: The enclosure to tour.
+            enclosure: Wybieg do zwiedzenia.
 
         Returns:
-            Tour description string.
+            Opis wycieczki.
         """
         return f"{self._name} is giving a tour of '{enclosure.name}' in {', '.join(self._languages)}."
 

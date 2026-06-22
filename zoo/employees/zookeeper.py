@@ -1,4 +1,4 @@
-"""Zookeeper module for the Zoo Garden system."""
+"""Moduł opiekuna dla systemu Zoo Garden."""
 
 from typing import Optional
 
@@ -7,10 +7,10 @@ from .employee import Employee
 
 class Zookeeper(Employee):
     """
-    Zookeeper - responsible for daily care of animals and enclosures.
+    Opiekun — odpowiedzialny za codzienną opiekę nad zwierzętami i wybiegami.
 
     Attributes:
-        _assigned_enclosure: Primary enclosure this zookeeper is responsible for.
+        _assigned_enclosure: Główny wybieg, za który odpowiada opiekun.
     """
 
     def __init__(self, name: str, salary: float = 4000.0) -> None:
@@ -19,16 +19,16 @@ class Zookeeper(Employee):
 
     @property
     def assigned_enclosure(self):
-        """Return the assigned enclosure."""
+        """Zwraca przypisany wybieg."""
         return self._assigned_enclosure
 
     def assign_to(self, enclosure) -> None:
-        """Assign this zookeeper to a specific enclosure."""
+        """Przypisuje opiekuna do konkretnego wybiegu."""
         self._assigned_enclosure = enclosure
         super().assign_to(enclosure)
 
     def feed_animals(self) -> str:
-        """Feed all animals in the assigned enclosure."""
+        """Karmi wszystkie zwierzęta w przypisanym wybiegu."""
         if self._assigned_enclosure:
             results = self._assigned_enclosure.feed_all()
             return f"{self._name} is feeding animals in '{self._assigned_enclosure.name}': " + ", ".join(results)

@@ -1,4 +1,4 @@
-"""Feeding schedule module for the Zoo Garden system."""
+"""Moduł harmonogramu karmienia dla systemu Zoo Garden."""
 
 from dataclasses import dataclass
 
@@ -6,13 +6,13 @@ from dataclasses import dataclass
 @dataclass
 class FeedingEntry:
     """
-    Represents a single feeding entry in the schedule.
+    Reprezentuje pojedynczy wpis w harmonogramie karmienia.
 
     Attributes:
-        enclosure_name: Name of the enclosure to feed.
-        time: Time of feeding (e.g., "09:00").
-        food_type: Type of food to serve.
-        notes: Optional additional notes.
+        enclosure_name: Nazwa wybiegu do nakarmienia.
+        time: Godzina karmienia (np. "09:00").
+        food_type: Typ podawanego pokarmu.
+        notes: Opcjonalne dodatkowe uwagi.
     """
 
     enclosure_name: str
@@ -23,14 +23,14 @@ class FeedingEntry:
 
 class FeedingSchedule:
     """
-    Manages the feeding schedule for the zoo.
+    Zarządza harmonogramem karmienia zoo.
 
-    Uses composition with FeedingEntry - entries don't exist
-    independently from the schedule.
+    Używa kompozycji z FeedingEntry — wpisy nie istnieją
+    niezależnie od harmonogramu.
 
     Attributes:
-        _day: Day of the week for this schedule.
-        _entries: List of feeding entries.
+        _day: Dzień tygodnia dla tego harmonogramu.
+        _entries: Lista wpisów karmienia.
     """
 
     def __init__(self, day: str = "Monday") -> None:
@@ -43,32 +43,32 @@ class FeedingSchedule:
 
     @property
     def entries(self) -> list:
-        """Return a copy of entries to prevent external modification."""
+        """Zwraca kopię wpisów, aby zapobiec modyfikacji z zewnątrz."""
         return list(self._entries)
 
     def add_entry(self, enclosure_name: str, time: str, food_type: str, notes: str = "") -> None:
         """
-        Add a feeding entry to the schedule.
+        Dodaje wpis karmienia do harmonogramu.
 
         Args:
-            enclosure_name: Name of the enclosure to feed.
-            time: Time of feeding.
-            food_type: Type of food.
-            notes: Optional notes.
+            enclosure_name: Nazwa wybiegu do nakarmienia.
+            time: Godzina karmienia.
+            food_type: Typ pokarmu.
+            notes: Opcjonalne uwagi.
         """
         entry = FeedingEntry(enclosure_name, time, food_type, notes)
         self._entries.append(entry)
 
     def remove_entry(self, enclosure_name: str, time: str) -> bool:
         """
-        Remove a feeding entry by enclosure name and time.
+        Usuwa wpis karmienia według nazwy wybiegu i godziny.
 
         Args:
-            enclosure_name: Name of the enclosure.
-            time: Time of the feeding.
+            enclosure_name: Nazwa wybiegu.
+            time: Godzina karmienia.
 
         Returns:
-            True if entry was removed, False if not found.
+            True jeśli wpis usunięto, False jeśli nie znaleziono.
         """
         for i, entry in enumerate(self._entries):
             if entry.enclosure_name == enclosure_name and entry.time == time:
@@ -78,13 +78,13 @@ class FeedingSchedule:
 
     def get_by_enclosure(self, name: str) -> list:
         """
-        Get all feeding entries for a specific enclosure.
+        Pobiera wszystkie wpisy karmienia dla danego wybiegu.
 
         Args:
-            name: Name of the enclosure.
+            name: Nazwa wybiegu.
 
         Returns:
-            List of feeding entries for the enclosure.
+            Lista wpisów karmienia dla wybiegu.
         """
         return [e for e in self._entries if e.enclosure_name == name]
 

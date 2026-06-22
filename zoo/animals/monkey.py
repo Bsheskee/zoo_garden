@@ -1,4 +1,4 @@
-"""Monkey — intelligent primate."""
+"""Małpa — inteligentny prymat."""
 
 from .mammal import Mammal
 

@@ -1,4 +1,4 @@
-"""Crocodile — large aquatic reptile."""
+"""Krokodyl — duży wodny gad."""
 
 from .reptile import Reptile
 

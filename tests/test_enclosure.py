@@ -1,4 +1,4 @@
-"""Tests for Enclosure class."""
+"""Testy klasy Enclosure (wybieg)."""
 
 import pytest
 
@@ -23,21 +23,21 @@ def elephant():
 
 
 def test_create_enclosure(enclosure):
-    """Test 1: Creating enclosure."""
+    """Test 1: Tworzenie wybiegu."""
     assert enclosure.name == "Savanna"
     assert enclosure.capacity == 3
     assert len(enclosure) == 0
 
 
 def test_add_animal_to_enclosure(enclosure, lion):
-    """Test 2: Adding animal to enclosure."""
+    """Test 2: Dodawanie zwierzęcia do wybiegu."""
     enclosure.add_animal(lion)
     assert lion in enclosure
     assert len(enclosure) == 1
 
 
 def test_enclosure_capacity_validation(enclosure, lion, elephant):
-    """Test 3: Enclosure capacity validation (EnclosureFullError)."""
+    """Test 3: Walidacja pojemności wybiegu (EnclosureFullError)."""
     monkey = Lion("George", 3)
 
     enclosure.add_animal(lion)
@@ -49,7 +49,7 @@ def test_enclosure_capacity_validation(enclosure, lion, elephant):
 
 
 def test_remove_animal(enclosure, lion):
-    """Test 4: Removing animal from enclosure."""
+    """Test 4: Usuwanie zwierzęcia z wybiegu."""
     enclosure.add_animal(lion)
     enclosure.remove_animal(lion)
     assert lion not in enclosure
@@ -57,13 +57,13 @@ def test_remove_animal(enclosure, lion):
 
 
 def test_remove_nonexistent_animal(enclosure, lion):
-    """Test 5: Removing nonexistent animal raises AnimalNotFoundError."""
+    """Test 5: Usuwanie nieistniejącego zwierzęcia zgłasza AnimalNotFoundError."""
     with pytest.raises(AnimalNotFoundError):
         enclosure.remove_animal(lion)
 
 
 def test_find_animal(enclosure, lion, elephant):
-    """Test 6: Finding animal by name."""
+    """Test 6: Wyszukiwanie zwierzęcia po imieniu."""
     enclosure.add_animal(lion)
     enclosure.add_animal(elephant)
 
@@ -75,7 +75,7 @@ def test_find_animal(enclosure, lion, elephant):
 
 
 def test_feed_all_animals(enclosure, lion, elephant):
-    """Test 7: Feeding all animals."""
+    """Test 7: Karmienie wszystkich zwierząt."""
     enclosure.add_animal(lion)
     enclosure.add_animal(elephant)
 
@@ -85,7 +85,7 @@ def test_feed_all_animals(enclosure, lion, elephant):
 
 
 def test_enclosure_dunder_methods(enclosure, lion):
-    """Test 8: Enclosure dunder methods (__len__, __contains__, __iter__)."""
+    """Test 8: Metody specjalne wybiegu (__len__, __contains__, __iter__)."""
     enclosure.add_animal(lion)
 
     assert len(enclosure) == 1
@@ -97,13 +97,13 @@ def test_enclosure_dunder_methods(enclosure, lion):
 
 
 def test_enclosure_str_repr(enclosure):
-    """Test 9: Enclosure string representations."""
+    """Test 9: Reprezentacje tekstowe wybiegu."""
     assert "Savanna" in str(enclosure)
     assert "Savanna" in repr(enclosure)
 
 
 def test_enclosure_equality():
-    """Test 10: Enclosure equality (__eq__, __hash__)."""
+    """Test 10: Równość wybiegów (__eq__, __hash__)."""
     enc1 = Enclosure("Savanna", 3)
     enc2 = Enclosure("Savanna", 5)  # Same name, different capacity
     enc3 = Enclosure("Aviary", 3)
@@ -116,7 +116,7 @@ def test_enclosure_equality():
 
 
 def test_animals_property_returns_copy(enclosure, lion):
-    """Test 11: animals property returns a copy."""
+    """Test 11: Właściwość animals zwraca kopię listy."""
     enclosure.add_animal(lion)
 
     animals1 = enclosure.animals
@@ -128,7 +128,7 @@ def test_animals_property_returns_copy(enclosure, lion):
 
 
 def test_enclosure_hash_in_set():
-    """Test 12: Enclosure can be used in sets (requires __hash__)."""
+    """Test 12: Wybieg może być używany w zbiorach (wymaga __hash__)."""
     enc1 = Enclosure("Savanna", 3)
     enc2 = Enclosure("Savanna", 5)
 
@@ -137,7 +137,7 @@ def test_enclosure_hash_in_set():
 
 
 def test_add_multiple_animals(enclosure):
-    """Test 13: Adding multiple animals."""
+    """Test 13: Dodawanie wielu zwierząt."""
     animals = [
         Lion("Simba", 5),
         Lion("Nala", 4),
@@ -151,13 +151,13 @@ def test_add_multiple_animals(enclosure):
 
 
 def test_enclosure_empty_feed(enclosure):
-    """Test 14: Feeding empty enclosure."""
+    """Test 14: Karmienie pustego wybiegu."""
     results = enclosure.feed_all()
     assert results == []
 
 
 def test_enclosure_full_error_message(enclosure, lion):
-    """Test 15: EnclosureFullError contains meaningful message."""
+    """Test 15: EnclosureFullError zawiera czytelny komunikat."""
     elephant = Elephant("Dumbo", 10)
     monkey = Lion("George", 3)
 

@@ -1,4 +1,4 @@
-"""Zoo module - main system class for Zoo Garden."""
+"""Moduł Zoo — główna klasa systemowa Zoo Garden."""
 
 from typing import Optional
 
@@ -8,16 +8,16 @@ from .enclosure import Enclosure
 
 class Zoo:
     """
-    Main zoo management class.
+    Główna klasa zarządzania zoo.
 
-    Uses composition with Enclosure (enclosures don't exist without zoo)
-    and aggregation with Employee (employees can exist independently).
+    Używa kompozycji z Enclosure (wybiegi nie istnieją bez zoo)
+    i agregacji z Employee (pracownicy mogą istnieć niezależnie).
 
     Attributes:
-        _name: Name of the zoo.
-        _city: City where the zoo is located.
-        _enclosures: Dictionary of enclosures (composition).
-        _employees: List of employees (aggregation).
+        _name: Nazwa zoo.
+        _city: Miasto, w którym znajduje się zoo.
+        _enclosures: Słownik wybiegów (kompozycja).
+        _employees: Lista pracowników (agregacja).
     """
 
     def __init__(self, name: str, city: str = "Lodz") -> None:
@@ -36,51 +36,51 @@ class Zoo:
 
     @property
     def enclosures(self) -> dict:
-        """Return a copy of the enclosures dict."""
+        """Zwraca kopię słownika wybiegów."""
         return dict(self._enclosures)
 
     @property
     def employees(self) -> list:
-        """Return a copy of the employees list."""
+        """Zwraca kopię listy pracowników."""
         return list(self._employees)
 
     def create_enclosure(self, name: str, capacity: int) -> Enclosure:
         """
-        Create a new enclosure in the zoo.
+        Tworzy nowy wybieg w zoo.
 
         Args:
-            name: Name of the enclosure.
-            capacity: Maximum number of animals.
+            name: Nazwa wybiegu.
+            capacity: Maksymalna liczba zwierząt.
 
         Returns:
-            The created enclosure.
+            Utworzony wybieg.
         """
         enclosure = Enclosure(name, capacity)
         self._enclosures[name] = enclosure
         return enclosure
 
     def get_enclosure(self, name: str) -> Enclosure | None:
-        """Get an enclosure by name."""
+        """Zwraca wybieg o podanej nazwie."""
         return self._enclosures.get(name)
 
     def hire_employee(self, employee: Employee) -> None:
         """
-        Hire a new employee.
+        Zatrudnia nowego pracownika.
 
         Args:
-            employee: The employee to hire.
+            employee: Pracownik do zatrudnienia.
         """
         self._employees.append(employee)
 
     def fire_employee(self, employee: Employee) -> bool:
         """
-        Fire an employee.
+        Zwalnia pracownika.
 
         Args:
-            employee: The employee to fire.
+            employee: Pracownik do zwolnienia.
 
         Returns:
-            True if employee was fired, False if not found.
+            True jeśli pracownik został zwolniony, False jeśli nie znaleziono.
         """
         if employee in self._employees:
             self._employees.remove(employee)
@@ -88,18 +88,18 @@ class Zoo:
         return False
 
     def total_animals(self) -> int:
-        """Return total number of animals in the zoo."""
+        """Zwraca łączną liczbę zwierząt w zoo."""
         return sum(len(enc) for enc in self._enclosures.values())
 
     def find_animal(self, name: str) -> Optional:
         """
-        Find an animal by name across all enclosures.
+        Szuka zwierzęcia po imieniu we wszystkich wybiegach.
 
         Args:
-            name: Name of the animal to find.
+            name: Imię szukanego zwierzęcia.
 
         Returns:
-            The animal if found, None otherwise.
+            Znalezione zwierzę lub None.
         """
         for enclosure in self._enclosures.values():
             animal = enclosure.find_animal(name)
@@ -109,10 +109,10 @@ class Zoo:
 
     def report(self) -> str:
         """
-        Generate a report about the zoo's current state.
+        Generuje raport o aktualnym stanie zoo.
 
         Returns:
-            Formatted report string.
+            Sformatowany ciąg raportu.
         """
         lines = [
             f"=== {self._name} Zoo Report ({self._city}) ===",
@@ -131,13 +131,13 @@ class Zoo:
         return "\n".join(lines)
 
     def __getitem__(self, name: str) -> Enclosure:
-        """Get enclosure by name using bracket notation."""
+        """Zwraca wybieg po nazwie używając notacji nawiasowej."""
         if name not in self._enclosures:
             raise KeyError(f"Enclosure '{name}' not found")
         return self._enclosures[name]
 
     def __contains__(self, item) -> bool:
-        """Check if an item (enclosure or employee) is in the zoo."""
+        """Sprawdza, czy element (wybieg lub pracownik) należy do zoo."""
         if isinstance(item, Enclosure):
             return item.name in self._enclosures
         if isinstance(item, Employee):
@@ -147,7 +147,7 @@ class Zoo:
         return False
 
     def __len__(self) -> int:
-        """Return number of enclosures in the zoo."""
+        """Zwraca liczbę wybiegów w zoo."""
         return len(self._enclosures)
 
     def __repr__(self) -> str:
